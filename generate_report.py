@@ -2,6 +2,7 @@
 Lab 2: Figma-to-Code, Layouts & Responsive Design - Report Generator
 Student: Nguyễn Văn Linh
 Student ID: 26560037
+Project: VibeTech E-Commerce Workspace Gear Landing Page (Homework Assignment)
 Repository: https://github.com/linh-nguyen123/Web-development-lab
 Output: 26560037_NguyễnVănLinh_Lab02.docx
 """
@@ -13,7 +14,7 @@ try:
     from docx import Document
     from docx.shared import Inches, Pt, RGBColor
     from docx.enum.text import WD_ALIGN_PARAGRAPH
-    from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
+    from docx.enum.table import WD_TABLE_ALIGNMENT
     from docx.oxml import OxmlElement, parse_xml
     from docx.oxml.ns import nsdecls, qn
 except ImportError:
@@ -43,23 +44,21 @@ def create_report():
     doc = Document()
 
     # Set page margins (1 inch)
-    sections = doc.sections
-    for section in sections:
+    for section in doc.sections:
         section.top_margin = Inches(1.0)
         section.bottom_margin = Inches(1.0)
         section.left_margin = Inches(1.0)
         section.right_margin = Inches(1.0)
 
     # Base Colors
-    COLOR_PRIMARY = RGBColor(15, 37, 55)     # #0F2537
-    COLOR_ACCENT = RGBColor(56, 189, 248)    # #38BDF8
-    COLOR_DARK = RGBColor(30, 41, 59)        # #1E293B
+    COLOR_PRIMARY = RGBColor(30, 27, 75)     # #1E1B4B
+    COLOR_ACCENT = RGBColor(79, 70, 229)     # #4F46E5
+    COLOR_DARK = RGBColor(15, 23, 42)        # #0F172A
     COLOR_MUTED = RGBColor(100, 116, 139)    # #64748B
-    HEX_HEADER_BG = "0F2537"
+    HEX_HEADER_BG = "4F46E5"
     HEX_LIGHT_BG = "F8FAFC"
-    HEX_ACCENT_BG = "E0F2FE"
-    HEX_BORDER = "CBD5E1"
-    HEX_PLACEHOLDER_BG = "F1F5F9"
+    HEX_ACCENT_BG = "EEF2FF"
+    HEX_PLACEHOLDER_BG = "F8FAFC"
 
     # =========================================================================
     # DOCUMENT COVER HEADER
@@ -75,19 +74,20 @@ def create_report():
 
     sub_p = doc.add_paragraph()
     sub_p.paragraph_format.space_after = Pt(16)
-    sub_run = sub_p.add_run("Bridging the Gap between Figma Specifications and Modern Responsive CSS Grids")
+    sub_run = sub_p.add_run("Homework Assignment: VibeTech Responsive E-Commerce Workspace Gear Landing Page")
     sub_run.font.name = "Arial"
     sub_run.font.size = Pt(12)
     sub_run.font.italic = True
-    sub_run.font.color.rgb = COLOR_MUTED
+    sub_run.font.color.rgb = COLOR_ACCENT
 
     # Student Credentials Table
-    cred_table = doc.add_table(rows=5, cols=2)
+    cred_table = doc.add_table(rows=6, cols=2)
     cred_table.alignment = WD_TABLE_ALIGNMENT.CENTER
     cred_data = [
         ("Student Name:", "Nguyễn Văn Linh"),
         ("Student ID:", "26560037"),
-        ("Course / Lab:", "Web Development Laboratory - Lab 02"),
+        ("Course / Lab:", "Web Development Laboratory - Lab Session 02"),
+        ("Figma Project:", "VibeTech E-Commerce Workspace Gear (Unleash the Next Level)"),
         ("Git Commit Message:", "lab02"),
         ("Target Repository:", "https://github.com/linh-nguyen123/Web-development-lab")
     ]
@@ -119,7 +119,7 @@ def create_report():
         if label.startswith("Git"):
             r_val.font.name = "Consolas"
             r_val.font.bold = True
-            r_val.font.color.rgb = RGBColor(14, 116, 144)
+            r_val.font.color.rgb = RGBColor(15, 118, 110)
         elif label.startswith("Target"):
             r_val.font.color.rgb = RGBColor(2, 132, 199)
             r_val.font.underline = True
@@ -153,9 +153,9 @@ def create_report():
     p_vp = doc.add_paragraph()
     p_vp.paragraph_format.space_after = Pt(6)
     p_vp.add_run(
-        "Without configuring the viewport metadata in the HTML <head>, mobile browsers default to rendering pages "
-        "at a virtual desktop resolution (commonly 980px). This causes text and layout structures to shrink dramatically, "
-        "rendering the UI illegible on mobile devices. In this lab, the mandatory viewport meta tag is implemented:"
+        "Without configuring the viewport metadata in the HTML <head>, mobile browsers render pages at an artificial "
+        "virtual desktop width (typically 980px). This makes font sizes tiny and unusable on mobile devices. "
+        "In this homework, the mandatory responsive viewport tag is implemented:"
     )
 
     p_code_vp = doc.add_paragraph()
@@ -165,32 +165,17 @@ def create_report():
     r_code_vp.font.name = "Consolas"
     r_code_vp.font.size = Pt(9.5)
     r_code_vp.font.bold = True
-    r_code_vp.font.color.rgb = RGBColor(3, 105, 161)
-
-    p_vp_desc = doc.add_paragraph()
-    p_vp_desc.paragraph_format.space_after = Pt(8)
-    p_vp_desc.add_run(
-        "• width=device-width: Enforces that the layout viewport precisely matches the device's physical screen width in CSS pixels.\n"
-        "• initial-scale=1.0: Sets a 1:1 scale ratio between physical device pixels and CSS pixels on initial page load."
-    )
+    r_code_vp.font.color.rgb = COLOR_ACCENT
 
     # 1.2 Figma Inspection & CSS Variables
     h2_2 = doc.add_paragraph()
     h2_2.paragraph_format.space_before = Pt(8)
     h2_2.paragraph_format.space_after = Pt(4)
-    r2_2 = h2_2.add_run("1.2 Figma Inspection and CSS Design Tokens (:root Variables)")
+    r2_2 = h2_2.add_run("1.2 Figma Dev Mode Inspection and CSS Design Tokens (:root Variables)")
     r2_2.font.name = "Arial"
     r2_2.font.size = Pt(11)
     r2_2.font.bold = True
     r2_2.font.color.rgb = COLOR_DARK
-
-    p_figma = doc.add_paragraph()
-    p_figma.paragraph_format.space_after = Pt(6)
-    p_figma.add_run(
-        "Following the lab guidelines, exact specifications were extracted from the Figma Dev Mode canvas instead of "
-        "approximating pixel measurements. Spacings were verified holding the Alt key, line-heights were converted into "
-        "unitless proportional multipliers, and all core design tokens were structured as CSS Custom Properties in :root:"
-    )
 
     var_table = doc.add_table(rows=6, cols=3)
     var_table.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -208,11 +193,11 @@ def create_report():
         r.font.color.rgb = RGBColor(255, 255, 255)
 
     tokens = [
-        ("--bg-dark / --bg-surface", "#0a0e17 / #111827", "Deep high-contrast canvas and card surface backgrounds"),
-        ("--accent-cyan / --accent-blue", "#38bdf8 / #3b82f6", "Primary Figma brand accent, active link highlights & badges"),
-        ("--bg-glass", "rgba(17, 24, 39, 0.82)", "Sticky navigation bar glassmorphism with 14px backdrop blur"),
-        ("--shadow-elevation", "0 20px 30px -10px ...", "Card hover elevation and smooth cyan glow box-shadow"),
-        ("--transition-smooth", "0.35s cubic-bezier(...)", "Consistent spring motion for card hover, image zoom & menu")
+        ("--bg-page", "#f8fafc", "Clean neutral light page background matching Figma frame"),
+        ("--brand-primary", "#4f46e5", "VibeTech brand indigo for logo, cart badge, active links"),
+        ("--brand-dark", "#0f172a", "Primary button background and Hot/Sale card badge background"),
+        ("--bg-glass", "rgba(255, 255, 255, 0.88)", "Sticky navbar glassmorphism background with 12px blur"),
+        ("--shadow-card-hover", "0 16px 28px -6px ...", "Smooth elevation box shadow on card hover")
     ]
     for row_idx, row_data in enumerate(tokens, start=1):
         for col_idx, text in enumerate(row_data):
@@ -238,13 +223,6 @@ def create_report():
     r2_3.font.bold = True
     r2_3.font.color.rgb = COLOR_PRIMARY
 
-    p_arch = doc.add_paragraph()
-    p_arch.paragraph_format.space_after = Pt(6)
-    p_arch.add_run(
-        "A foundational principle of modern CSS architecture is knowing when to employ Flexbox versus Grid. "
-        "The differences and their respective implementations in Lab 2 are summarized below:"
-    )
-
     comp_table = doc.add_table(rows=5, cols=3)
     comp_table.alignment = WD_TABLE_ALIGNMENT.CENTER
     c_headers = ["Architectural Dimension", "CSS Flexbox (1-Dimensional)", "CSS Grid (2-Dimensional)"]
@@ -261,10 +239,10 @@ def create_report():
         r.font.color.rgb = RGBColor(255, 255, 255)
 
     comp_data = [
-        ("Dimensional Control", "1-Dimensional: Aligns items along a single axis (row OR column at a time).", "2-Dimensional: Controls rows AND columns simultaneously in a unified grid coordinate plane."),
-        ("Design Paradigm", "Content-First: Child elements dictate sizing based on inner content; container distributes spacing.", "Layout-First: Container dictates strict tracks; child elements snap into predefined slots."),
-        ("Ideal Use Cases", "Navigation bars, toolbars, badges, button groups, vertical card content stacking.", "Product catalogs, multi-column portfolio grids, image galleries, complex dashboard dashboards."),
-        ("Lab 2 Implementation", "Sticky Navbar: display: flex; justify-content: space-between; align-items: center; with glassmorphism.", "Portfolio Gallery: grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) with media query breakpoints.")
+        ("Dimensional Control", "1-Dimensional: Aligns items along one axis at a time (row OR column).", "2-Dimensional: Simultaneously coordinates items across rows AND columns in a unified layout plane."),
+        ("Design Paradigm", "Content-First: Items determine their own dimensions based on internal content; container aligns them.", "Layout-First: Container defines explicit grid track structures; items snap within assigned slots."),
+        ("Ideal UI Targets", "Sticky navigation bars, toolbar actions, search/cart buttons, mobile drawer menus.", "Product catalogs, multi-column portfolio grids, image galleries, complex web apps."),
+        ("Homework Implementation", "Navbar: display: flex; justify-content: space-between; align-items: center; with glassmorphism.", "Product Grid: grid-template-columns across 4 columns (desktop), 2 columns (tablet), 1 column (mobile).")
     ]
     for row_idx, row_data in enumerate(comp_data, start=1):
         for col_idx, text in enumerate(row_data):
@@ -294,43 +272,30 @@ def create_report():
     r2.font.bold = True
     r2.font.color.rgb = COLOR_PRIMARY
 
-    p_check_intro = doc.add_paragraph()
-    p_check_intro.paragraph_format.space_after = Pt(8)
-    p_check_intro.add_run(
-        "The following placeholders are formatted for pasting execution screenshots directly into the report. "
-        "Each section verifies a specific functional requirement established in Lab 2."
-    )
-
     placeholders = [
         (
             "[Screenshot Placeholder 1] Sticky Navbar & Hover Effects (CSS Flexbox)",
-            "Sticky navigation bar with glassmorphism (backdrop-filter: blur(14px)), brand logo, horizontal desktop links, "
-            "and interactive hover transitions. Implemented via display: flex; justify-content: space-between; align-items: center;."
+            "Sticky header with VibeTech logo, centered navigation links (Home, Products, Deals, About), search & cart icons, and glassmorphism (backdrop-filter: blur(12px))."
         ),
         (
-            "[Screenshot Placeholder 2] Product/Portfolio Grid Layout (CSS Grid 6+ Items)",
-            "CSS Grid section showcasing 6 portfolio items: Creative Interface, Dynamic Dashboard, E-Commerce Storefront, "
-            "Social Media App, Finance Tracker, and Fitness Companion, with category badges and action buttons."
+            "[Screenshot Placeholder 2] Product/Portfolio Grid Layout (CSS Grid 8 Items)",
+            "Full product grid showing 8 items: Wireless Mouse, Tactix K85 Mechanical, ZenSound ANC Headset, NovaFit Smart Watch, Horizon 27 IPS Display, StreamMic Pro, Lumos Desk Lamp, and ErgoStand Riser."
         ),
         (
             "[Screenshot Placeholder 3] Responsive Mobile Viewport Layout (< 768px - 1 Column)",
-            "Mobile simulation (< 768px): Verified 1-column grid layout (grid-template-columns: 1fr), visible hamburger toggle button, "
-            "and collapsible navigation drawer functioning via the menuToggle JavaScript event."
+            "Mobile simulation (< 768px): 1-column card stack, visible hamburger button, and active mobile navigation drawer."
         ),
         (
-            "[Screenshot Placeholder 4] Responsive Tablet Viewport Layout (768px - 1023px - 2 Columns)",
-            "Tablet simulation (768px - 1023px): Verified 2-column grid layout (grid-template-columns: repeat(2, 1fr)), "
-            "automatic expansion of horizontal desktop links, and hamburger menu toggle hidden."
+            "[Screenshot Placeholder 4] Responsive Tablet Viewport Layout (768px - 1023px - 2 Columns, Figma 768w light)",
+            "Tablet simulation (768px - 1023px): 2-column product grid, hidden hamburger button, and horizontal desktop navbar links active."
         ),
         (
-            "[Screenshot Placeholder 5] Responsive Desktop Viewport Layout (>= 1024px - 3 Columns)",
-            "Desktop viewport (>= 1024px): Full 3-column expansive grid layout (grid-template-columns: repeat(3, 1fr)), "
-            "centered 1240px container, and full typography scale."
+            "[Screenshot Placeholder 5] Responsive Desktop Viewport Layout (>= 1024px - 4 Columns, Figma 1024w & 1920w light)",
+            "Desktop viewport (>= 1024px): 4-column product grid layout, centered 1280px container, and full desktop navbar."
         ),
         (
-            "[Screenshot Placeholder 6] Interactive Hover States (Image Zoom & Box-Shadow Elevation)",
-            "Demonstration of active cursor hover: Image smooth zoom (transform: scale(1.08)), card elevation (translateY(-8px)), "
-            "and dynamic cyan shadow glow (box-shadow: 0 20px 30px -10px rgba(56, 189, 248, 0.25))."
+            "[Screenshot Placeholder 6] Interactive Hover States (Image Zoom & Elevation)",
+            "Active cursor hover showing card image scale (transform: scale(1.08)), card elevation (translateY(-6px)), and glowing box-shadow."
         )
     ]
 
@@ -338,7 +303,6 @@ def create_report():
         box_table = doc.add_table(rows=2, cols=1)
         box_table.alignment = WD_TABLE_ALIGNMENT.CENTER
 
-        # Title Cell
         c_title = box_table.rows[0].cells[0]
         c_title.width = Inches(6.5)
         set_cell_background(c_title, HEX_ACCENT_BG)
@@ -358,7 +322,6 @@ def create_report():
         r_d.font.size = Pt(8.5)
         r_d.font.color.rgb = COLOR_MUTED
 
-        # Screenshot Area Cell
         c_box = box_table.rows[1].cells[0]
         c_box.width = Inches(6.5)
         set_cell_background(c_box, HEX_PLACEHOLDER_BG)
@@ -386,70 +349,16 @@ def create_report():
     r3.font.bold = True
     r3.font.color.rgb = COLOR_PRIMARY
 
-    p_git_intro = doc.add_paragraph()
-    p_git_intro.paragraph_format.space_after = Pt(6)
-    p_git_intro.add_run(
-        "As specified in the functional requirements, the complete project source code was committed with the exact "
-        "message 'lab02' and deployed live to the public internet using GitHub Pages."
-    )
-
-    git_table = doc.add_table(rows=4, cols=2)
-    git_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    git_specs = [
-        ("Target Repository:", "https://github.com/linh-nguyen123/Web-development-lab"),
-        ("Required Commit Message:", "lab02"),
-        ("Target Branch:", "main (or master)"),
-        ("Live GitHub Pages URL:", "https://linh-nguyen123.github.io/Web-development-lab/")
-    ]
-    for idx, (label, val) in enumerate(git_specs):
-        cell_lbl, cell_val = git_table.rows[idx].cells[0], git_table.rows[idx].cells[1]
-        cell_lbl.width = Inches(2.2)
-        cell_val.width = Inches(4.3)
-        set_cell_background(cell_lbl, "F1F5F9")
-        set_cell_background(cell_val, "FFFFFF")
-        set_cell_margins(cell_lbl, top=80, bottom=80, left=140, right=140)
-        set_cell_margins(cell_val, top=80, bottom=80, left=140, right=140)
-
-        p1 = cell_lbl.paragraphs[0]
-        p1.paragraph_format.space_after = Pt(0)
-        r1 = p1.add_run(label)
-        r1.font.name = "Arial"
-        r1.font.size = Pt(9.5)
-        r1.font.bold = True
-        r1.font.color.rgb = COLOR_DARK
-
-        p2 = cell_val.paragraphs[0]
-        p2.paragraph_format.space_after = Pt(0)
-        r2 = p2.add_run(val)
-        r2.font.name = "Consolas" if "Commit" in label or "Branch" in label else "Arial"
-        r2.font.size = Pt(9.5)
-        if "URL" in label or "Repository" in label:
-            r2.font.color.rgb = RGBColor(2, 132, 199)
-            r2.font.underline = True
-        else:
-            r2.font.bold = True
-            r2.font.color.rgb = COLOR_DARK
-
-    p_cmd_title = doc.add_paragraph()
-    p_cmd_title.paragraph_format.space_before = Pt(10)
-    p_cmd_title.paragraph_format.space_after = Pt(4)
-    r_ct = p_cmd_title.add_run("Terminal Execution Commands for Submission:")
-    r_ct.font.name = "Arial"
-    r_ct.font.size = Pt(10.5)
-    r_ct.font.bold = True
-    r_ct.font.color.rgb = COLOR_PRIMARY
-
     p_cmd = doc.add_paragraph()
     p_cmd.paragraph_format.space_after = Pt(10)
     cmd_text = (
-        "# 1. Initialize and verify workspace files\n"
-        "git add index.html styles.css assets/ 26560037_NguyễnVănLinh_Lab02.docx\n\n"
-        "# 2. Commit with mandatory message\n"
+        "# Stage all homework files\n"
+        "git add index.html styles.css assets/ 26560037_NguyễnVănLinh_Lab02.docx generate_report.py README.md\n\n"
+        "# Commit with mandatory lab02 message\n"
         'git commit -m "lab02"\n\n'
-        "# 3. Set branch to main and link remote\n"
-        "git branch -M main\n"
-        "git remote add origin https://github.com/linh-nguyen123/Web-development-lab.git\n\n"
-        "# 4. Push changes to GitHub repository\n"
+        "# Set branch to main\n"
+        "git branch -M main\n\n"
+        "# Push changes to GitHub repository\n"
         "git push -u origin main"
     )
     r_cmd = p_cmd.add_run(cmd_text)
@@ -466,7 +375,7 @@ def create_report():
     set_cell_margins(c_gh_t, top=100, bottom=100, left=140, right=140)
     p_ght = c_gh_t.paragraphs[0]
     p_ght.paragraph_format.space_after = Pt(0)
-    r_ght = p_ght.add_run("[Screenshot Placeholder 7] GitHub Repository & Live GitHub Pages Proof")
+    r_ght = p_ght.add_run("[Screenshot Placeholder 7] GitHub Pages Deployment Status & Live Page Proof")
     r_ght.font.name = "Arial"
     r_ght.font.size = Pt(10.5)
     r_ght.font.bold = True

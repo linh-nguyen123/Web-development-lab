@@ -1,6 +1,7 @@
 # Lab 2: Figma-to-Code, Layouts & Responsive Design
 
-**Course:** Web Development Laboratory  
+**Homework Assignment:** VibeTech Responsive E-Commerce Workspace Gear Landing Page  
+**Design Heading:** *Unleash the Next Level*  
 **Student Name:** Nguyễn Văn Linh  
 **Student ID:** 26560037  
 **Submission Commit:** `lab02`  
@@ -10,66 +11,74 @@
 
 ---
 
-## 📌 Project Overview
-This laboratory project systematically translates user interface designs created in Figma into semantic HTML5 code styled with advanced CSS layouts. It demonstrates:
-1. **Figma Dev Mode Inspection:** Translating visual tokens (colors, font hierarchy, unitless line-height, spacings via `Alt` key) into CSS variables (`:root`).
-2. **Mandatory Viewport Meta Tag:** `<meta name="viewport" content="width=device-width, initial-scale=1.0">` to ensure accurate 1:1 CSS pixel scaling on mobile devices.
-3. **1-Dimensional CSS Flexbox Navigation:** Sticky navbar (`position: sticky; top: 0;`) with modern glassmorphism (`backdrop-filter: blur(14px)`), smooth hover indicator transitions, and an interactive mobile drawer menu.
-4. **2-Dimensional CSS Grid Portfolio Section:** 6-item portfolio showcase (`Creative Interface`, `Dynamic Dashboard`, `E-Commerce Storefront`, `Social Media App`, `Finance Tracker`, and `Fitness Companion`).
-5. **Mobile-First Responsive Breakpoint Architecture:**
-   - **Mobile Viewport (`< 768px`):** 1-column grid stack, compact padding, hamburger navigation drawer.
-   - **Tablet Viewport (`768px - 1023px`):** 2-column grid (`repeat(2, 1fr)`), horizontal desktop links visible, hamburger menu toggle hidden.
-   - **Desktop Viewport (`>= 1024px`):** 3-column expansive grid (`repeat(3, 1fr)`), max-width 1240px container.
-6. **Interactive Hover States:** Smooth image zoom (`transform: scale(1.08)`), card elevation (`transform: translateY(-8px)`), and glowing box-shadow effects.
+## 📌 Homework Implementation Summary
+
+This project implements the official Homework assignment from Lab 2 ("Responsive Landing Page") based on the Figma design specifications:
+
+1. **Figma Dev Mode Tokens:**
+   - Colors: `#f8fafc` page canvas, `#ffffff` card surface, `#4f46e5` brand indigo, `#0f172a` button/badge slate.
+   - Typography: `Inter` font-family with unitless responsive line-heights.
+   - Assets: Direct vector SVGs & high-fidelity assets inside `assets/`.
+
+2. **Sticky Navigation Bar (CSS Flexbox):**
+   - Implemented via `display: flex; justify-content: space-between; align-items: center;`.
+   - `position: sticky; top: 0;` with glassmorphism `backdrop-filter: blur(12px)`.
+   - Contains VibeTech logo, navigation links (`Home`, `Products`, `Deals`, `About`), search icon, cart counter badge, and mobile hamburger drawer.
+
+3. **Responsive Product Grid (CSS Grid):**
+   - 8 Curated Workspace Gear Items:
+     1. `Wireless Mouse` (Badge: **Hot**) — `$59.00`
+     2. `Tactix K85 Mechanical Keyboard` — `$129.00`
+     3. `ZenSound ANC Headset` (Yellow Background) — `$189.00`
+     4. `NovaFit Smart Watch` (Badge: **Sale**) — `$99.00`
+     5. `Horizon 27" IPS QHD Display` (Badge: **New**) — `$299.00`
+     6. `StreamMic Pro Cardioid` — `$149.00`
+     7. `Lumos RGB Smart Desk Lamp` (Badge: **Sale**) — `$45.00`
+     8. `ErgoStand Aluminum Laptop Riser` — `$69.00`
+
+4. **Mobile-First Responsive Layouts:**
+   - **Mobile Viewport (`< 768px`):** 1-column product grid stack (`grid-template-columns: 1fr;`), mobile hamburger drawer menu.
+   - **Tablet Viewport (`768px - 1023px`, Figma `768w light`):** 2-column product grid (`repeat(2, 1fr)`), horizontal desktop links.
+   - **Desktop Viewport (`>= 1024px`, Figma `1024w` & `1920w light`):** 4-column product grid (`repeat(4, 1fr)`), centered 1280px container.
+
+5. **Interactive Hover States:**
+   - Card elevation: `transform: translateY(-6px); box-shadow: 0 16px 28px -6px rgba(0, 0, 0, 0.09);`
+   - Image zoom: `.card-image-box img { transform: scale(1.08); transition: transform 0.35s ease; }`
+   - Add to Cart interactive counter and visual feedback.
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Directory Structure
 ```text
-├── index.html                           # Semantic HTML5 page with viewport tag and grid structure
-├── styles.css                           # Mobile-First CSS stylesheet with :root variables & media queries
-├── assets/                              # Exported SVG vector assets and logos
-│   ├── logo.svg                         # Main brand logo
-│   ├── project1.svg                     # Creative Interface project illustration
-│   ├── project2.svg                     # Dynamic Dashboard project illustration
-│   ├── project3.svg                     # E-Commerce Storefront project illustration
-│   ├── project4.svg                     # Social Media App project illustration
-│   ├── project5.svg                     # Finance Tracker project illustration
-│   └── project6.svg                     # Fitness Companion project illustration
-├── 26560037_NguyễnVănLinh_Lab02.docx    # Official academic Word report document
-├── generate_report.py                   # Python report generator script (python-docx)
-├── build_docx.ps1                       # Native PowerShell OpenXML document builder
+├── index.html                           # Semantic HTML5 with viewport meta tag & 8-product grid
+├── styles.css                           # Mobile-First CSS Grid (4 cols, 2 cols, 1 col) & Flexbox
+├── assets/                              # Figma design icons & product illustrations
+│   ├── vibetech_logo.svg                # VibeTech vector logo
+│   ├── product1.svg / product1.png      # Wireless Mouse
+│   ├── product2.svg / product2.png      # Tactix K85 Mechanical
+│   ├── product3.svg / product3.png      # ZenSound ANC Headset
+│   ├── product4.svg / product4.png      # NovaFit Smart Watch
+│   ├── product5.svg / product5.png      # Horizon 27" IPS QHD Display
+│   ├── product6.svg / product6.png      # StreamMic Pro Cardioid
+│   ├── product7.svg / product7.png      # Lumos RGB Smart Desk Lamp
+│   └── product8.svg / product8.png      # ErgoStand Aluminum Laptop Riser
+├── 26560037_NguyễnVănLinh_Lab02.docx    # Official Word Report Document
+├── generate_report.py                   # Python-docx Report Builder Script
+├── build_docx.ps1                       # Native PowerShell OpenXML Document Builder
 ├── .gitignore                           # Git ignore rules
 └── README.md                            # Project documentation
 ```
 
 ---
 
-## 🚀 Git Submission Commands
-Execute the following commands in the project root:
-
+## 🚀 Git Commands
 ```bash
-# 1. Stage all project files
-git add index.html styles.css assets/ 26560037_NguyễnVănLinh_Lab02.docx generate_report.py README.md .gitignore
+# 1. Stage all files
+git add .
 
-# 2. Commit with the mandatory lab message
+# 2. Commit with mandatory message
 git commit -m "lab02"
 
-# 3. Ensure branch is main
-git branch -M main
-
-# 4. Link the target remote repository (if not already linked)
-git remote add origin https://github.com/linh-nguyen123/Web-development-lab.git
-
-# 5. Push to GitHub
+# 3. Push to GitHub
 git push -u origin main
 ```
-
----
-
-## 🌐 GitHub Pages Deployment
-1. Navigate to your repository on GitHub: `https://github.com/linh-nguyen123/Web-development-lab`.
-2. Go to **Settings** &rarr; **Pages** (under Code and automation).
-3. Under **Build and deployment** &rarr; **Source**, select **Deploy from a branch**.
-4. Choose Branch: `main` (or `master`), Folder: `/ (root)`, and click **Save**.
-5. Once built, access the live site at: **`https://linh-nguyen123.github.io/Web-development-lab/`**.
