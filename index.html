@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Lab 2 Requirement: Mandatory Viewport Meta Tag for Mobile Responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Creative Portfolio | Lab 2: Figma-to-Code - Nguyễn Văn Linh (26560037)</title>
+  <meta name="description" content="Lab 2: Figma-to-Code, Layouts & Responsive Design showcasing CSS Flexbox navigation and CSS Grid portfolio layout.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       1. STICKY NAVBAR (CSS Flexbox with Glassmorphism)
+       ========================================================= -->
+  <header class="navbar" id="topNavbar">
+    <div class="logo">
+      <img src="assets/logo.svg" alt="DevLogo" class="logo-icon" width="36" height="36">
+      <div class="logo-text">
+        <span class="brand-title">DevStudio</span>
+        <span class="brand-sub">Lab 02</span>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Toggle Button (Visible on screens < 768px) -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <!-- Navigation Links (Flexbox horizontal on desktop, expandable on mobile) -->
+    <nav class="nav-links" id="navMenu">
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#architecture" class="nav-link">Architecture</a>
+      <a href="#portfolio" class="nav-link">Portfolio Grid</a>
+      <a href="#specs" class="nav-link">Figma Specs</a>
+      <a href="https://github.com/linh-nguyen123/Web-development-lab" target="_blank" rel="noopener noreferrer" class="nav-cta">
+        <svg class="gh-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub Lab</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- =========================================================
+       2. HERO SECTION ("Unleash the Next Level")
+       ========================================================= -->
+  <section class="hero-section" id="hero">
+    <div class="hero-container">
+      <div class="badge-pill">
+        <span class="badge-dot"></span>
+        <span>Figma-to-Code Engineering &bull; Lab 2</span>
+      </div>
+      <h1 class="hero-title">Unleash the Next Level</h1>
+      <p class="hero-subtitle">
+        Bridging the gap between Figma design tokens and modern responsive CSS architectures.
+        A showcase of 1-Dimensional Flexbox alignments and 2-Dimensional CSS Grids.
+      </p>
+
+      <!-- Student Credentials Banner -->
+      <div class="student-info-card">
+        <div class="student-pill">
+          <span class="info-label">Student:</span>
+          <span class="info-value">Nguyễn Văn Linh</span>
+        </div>
+        <div class="student-pill">
+          <span class="info-label">Student ID:</span>
+          <span class="info-value">26560037</span>
+        </div>
+        <div class="student-pill">
+          <span class="info-label">Assignment:</span>
+          <span class="info-value">Lab 02 Responsive Grids</span>
+        </div>
+        <div class="student-pill">
+          <span class="info-label">Commit:</span>
+          <span class="info-value code-font">lab02</span>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-primary">Explore Portfolio Grid</a>
+        <a href="#architecture" class="btn-secondary">View Architecture Spec</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       3. ARCHITECTURE SECTION: CSS FLEXBOX VS CSS GRID
+       ========================================================= -->
+  <section class="architecture-section" id="architecture">
+    <div class="section-header">
+      <h2 class="section-title">Layout Architectures</h2>
+      <p class="section-desc">Technical Comparison: 1-Dimensional CSS Flexbox vs. 2-Dimensional CSS Grid</p>
+    </div>
+
+    <div class="arch-grid">
+      <!-- Flexbox Architecture Card -->
+      <div class="arch-card">
+        <div class="arch-icon-box flexbox-theme">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="5" width="20" height="14" rx="3"></rect>
+            <line x1="8" y1="5" x2="8" y2="19"></line>
+            <line x1="14" y1="5" x2="14" y2="19"></line>
+          </svg>
+        </div>
+        <div class="arch-badge">1-Dimensional</div>
+        <h3>CSS Flexbox</h3>
+        <p class="arch-summary"><strong>Approach:</strong> Content-First. Elements size themselves naturally while the container distributes and aligns them along a single axis.</p>
+        <ul class="arch-list">
+          <li><strong>Primary Role:</strong> Linear distribution (Row <em>or</em> Column).</li>
+          <li><strong>Alignment Control:</strong> <code>justify-content</code> &amp; <code>align-items</code>.</li>
+          <li><strong>Best Fit:</strong> Navigation bars, action button clusters, badges, breadcrumbs, centered card contents.</li>
+          <li><strong>Applied in Lab 2:</strong> Sticky header, brand identity, and nav links.</li>
+        </ul>
+      </div>
+
+      <!-- CSS Grid Architecture Card -->
+      <div class="arch-card">
+        <div class="arch-icon-box grid-theme">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          </svg>
+        </div>
+        <div class="arch-badge">2-Dimensional</div>
+        <h3>CSS Grid</h3>
+        <p class="arch-summary"><strong>Approach:</strong> Layout-First. The container defines a rigid coordinate structure of tracks, and items occupy precise slots.</p>
+        <ul class="arch-list">
+          <li><strong>Primary Role:</strong> Planar distribution (Rows <em>and</em> Columns simultaneously).</li>
+          <li><strong>Template Syntax:</strong> <code>grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))</code>.</li>
+          <li><strong>Best Fit:</strong> Multi-column portfolio cards, image galleries, complex app dashboards.</li>
+          <li><strong>Applied in Lab 2:</strong> 6-card responsive project gallery.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       4. MAIN RESPONSIVE PORTFOLIO GRID SECTION (6+ ITEMS)
+       ========================================================= -->
+  <section class="portfolio-section" id="portfolio">
+    <header class="portfolio-header">
+      <h2 class="section-title">Creative Portfolio</h2>
+      <p class="section-desc">A showcase of clean layouts designed from Figma specifications</p>
+    </header>
+
+    <main class="grid-container" id="gridContainer">
+
+      <!-- Project Card 1: Creative Interface -->
+      <article class="project-card">
+        <div class="card-image-box">
+          <img src="assets/project1.svg" alt="Creative Interface Project" loading="lazy">
+          <span class="card-category">UI / UX Design</span>
+        </div>
+        <div class="card-content">
+          <div class="tech-tags">
+            <span class="tag">Figma</span>
+            <span class="tag">CSS Grid</span>
+            <span class="tag">Variables</span>
+          </div>
+          <h2 class="card-title">Creative Interface</h2>
+          <p class="card-desc">Advanced Figma-to-code project focusing on responsive CSS variables, semantic hierarchies, and tokenized typography.</p>
+          <div class="card-footer">
+            <a href="#modal-1" class="btn-more">View Project <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project Card 2: Dynamic Dashboard -->
+      <article class="project-card">
+        <div class="card-image-box">
+          <img src="assets/project2.svg" alt="Dynamic Application UI" loading="lazy">
+          <span class="card-category">Web Application</span>
+        </div>
+        <div class="card-content">
+          <div class="tech-tags">
+            <span class="tag">Dashboard</span>
+            <span class="tag">Flexbox</span>
+            <span class="tag">Dark Mode</span>
+          </div>
+          <h2 class="card-title">Dynamic Dashboard</h2>
+          <p class="card-desc">Beautiful tabular layout featuring custom responsive borders, real-time KPI card tracks, and fluid SVG metric graphs.</p>
+          <div class="card-footer">
+            <a href="#modal-2" class="btn-more">View Project <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project Card 3: E-Commerce Storefront -->
+      <article class="project-card">
+        <div class="card-image-box">
+          <img src="assets/project3.svg" alt="E-Commerce Storefront" loading="lazy">
+          <span class="card-category">E-Commerce</span>
+        </div>
+        <div class="card-content">
+          <div class="tech-tags">
+            <span class="tag">Catalog Grid</span>
+            <span class="tag">Cart Modal</span>
+            <span class="tag">Filter Flow</span>
+          </div>
+          <h2 class="card-title">E-Commerce Storefront</h2>
+          <p class="card-desc">A feature-packed shopping experience with clean, modern product grids, dynamic pricing cards, and sleek checkout flow.</p>
+          <div class="card-footer">
+            <a href="#modal-3" class="btn-more">View Project <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project Card 4: Social Media App -->
+      <article class="project-card">
+        <div class="card-image-box">
+          <img src="assets/project4.svg" alt="Social Media App" loading="lazy">
+          <span class="card-category">Community Platform</span>
+        </div>
+        <div class="card-content">
+          <div class="tech-tags">
+            <span class="tag">Live Chat</span>
+            <span class="tag">Flex Alignment</span>
+            <span class="tag">Feed UI</span>
+          </div>
+          <h2 class="card-title">Social Media App</h2>
+          <p class="card-desc">Real-time feed interface built with smooth transitions, responsive comment hierarchies, and glassmorphism chat panels.</p>
+          <div class="card-footer">
+            <a href="#modal-4" class="btn-more">View Project <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project Card 5: Finance Tracker -->
+      <article class="project-card">
+        <div class="card-image-box">
+          <img src="assets/project5.svg" alt="Finance Tracker" loading="lazy">
+          <span class="card-category">FinTech</span>
+        </div>
+        <div class="card-content">
+          <div class="tech-tags">
+            <span class="tag">Data Viz</span>
+            <span class="tag">Budgeting</span>
+            <span class="tag">Mobile-First</span>
+          </div>
+          <h2 class="card-title">Finance Tracker</h2>
+          <p class="card-desc">Data visualization dashboard for personal balance management, expense allocation grids, and multi-currency monitors.</p>
+          <div class="card-footer">
+            <a href="#modal-5" class="btn-more">View Project <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project Card 6: Fitness Companion -->
+      <article class="project-card">
+        <div class="card-image-box">
+          <img src="assets/project6.svg" alt="Fitness Companion" loading="lazy">
+          <span class="card-category">Health &amp; Wellness</span>
+        </div>
+        <div class="card-content">
+          <div class="tech-tags">
+            <span class="tag">Activity Rings</span>
+            <span class="tag">Habit Tracker</span>
+            <span class="tag">SVG Waves</span>
+          </div>
+          <h2 class="card-title">Fitness Companion</h2>
+          <p class="card-desc">Mobile-first application interface for tracking daily workout routines, calories burned, and biometric activity milestones.</p>
+          <div class="card-footer">
+            <a href="#modal-6" class="btn-more">View Project <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+      </article>
+
+    </main>
+  </section>
+
+  <!-- =========================================================
+       5. FIGMA SPECS & RESPONSIVENESS DEMO SECTION
+       ========================================================= -->
+  <section class="specs-section" id="specs">
+    <div class="section-header">
+      <h2 class="section-title">Responsive Design &amp; Media Queries</h2>
+      <p class="section-desc">Mobile-First Breakpoint Architecture for Multi-Device Adaptation</p>
+    </div>
+
+    <div class="specs-container">
+      <div class="spec-card">
+        <div class="spec-icon">&phone;</div>
+        <h3>Mobile Viewport</h3>
+        <p class="spec-rule">&lt; 768px</p>
+        <p class="spec-desc">Single column layout (<code>1fr</code>), hamburger navigation menu drawer, fluid typography using <code>rem</code> units.</p>
+        <div class="spec-badge">1 Column Grid</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">&#128187;</div>
+        <h3>Tablet Viewport</h3>
+        <p class="spec-rule">768px &ndash; 1023px</p>
+        <p class="spec-desc">Two-column dynamic grid (<code>repeat(2, 1fr)</code>), horizontal top navbar links visible, padded margins.</p>
+        <div class="spec-badge">2 Column Grid</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon">&#128421;</div>
+        <h3>Desktop Viewport</h3>
+        <p class="spec-rule">&ge; 1024px</p>
+        <p class="spec-desc">Three-column expansive grid (<code>repeat(3, 1fr)</code>), max-width 1240px container, interactive zoom hover states.</p>
+        <div class="spec-badge">3 Column Grid</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       6. FOOTER
+       ========================================================= -->
+  <footer class="portfolio-footer" id="contact">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <div class="logo">
+          <img src="assets/logo.svg" alt="DevLogo" class="logo-icon" width="30" height="30">
+          <span class="brand-title">CreativePort</span>
+        </div>
+        <p class="footer-tagline">
+          Academic Laboratory 2 Submission &bull; Figma-to-Code, Layouts &amp; Responsive Web Grids.
+        </p>
+        <p class="footer-author">
+          Crafted by <strong>Nguyễn Văn Linh</strong> (Student ID: <strong>26560037</strong>)
+        </p>
+      </div>
+
+      <div class="footer-col links-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#hero">Hero Section</a></li>
+          <li><a href="#architecture">Architecture Comparison</a></li>
+          <li><a href="#portfolio">Portfolio Grid</a></li>
+          <li><a href="#specs">Figma Specifications</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col repo-col">
+        <h4>Deployment &amp; Git</h4>
+        <p>Live Page deployed on GitHub Pages.</p>
+        <a href="https://github.com/linh-nguyen123/Web-development-lab" target="_blank" rel="noopener noreferrer" class="btn-github-footer">
+          Visit GitHub Repository &rarr;
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nguyễn Văn Linh &bull; Student ID: 26560037 &bull; Lab 2 Submission</p>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       7. JAVASCRIPT (Mobile Menu Toggle - Exercise 2 Requirement)
+       ========================================================= -->
+  <script>
+    // Lab 2 Exercise 2: Mobile Navigation Menu Interactive Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        const isExpanded = navMenu.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', isExpanded);
+      });
+
+      // Close mobile menu when clicking outside or clicking any nav link
+      const navLinks = navMenu.querySelectorAll('.nav-link, .nav-cta');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // Interactive toast for "View Project" buttons
+    document.querySelectorAll('.btn-more').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const cardTitle = btn.closest('.project-card')?.querySelector('.card-title')?.textContent || 'Project';
+        alert(`Opening details for [${cardTitle}].\nDesigned according to Figma Dev Mode specifications!`);
+      });
+    });
+  </script>
+</body>
+</html>
