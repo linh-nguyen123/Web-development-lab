@@ -394,9 +394,12 @@ button {
 }
 
 .card-price {
-  font-size: 1.2rem;
+  color: #4F46E5;
+  font-family: 'Roboto', sans-serif;
+  font-size: 19.4px;
+  font-style: normal;
   font-weight: 700;
-  color: var(--text-price);
+  line-height: 30px; /* 154.639% */
 }
 
 /* "Add to Cart" Action Button */

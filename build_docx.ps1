@@ -1,4 +1,4 @@
-# PowerShell OpenXML Document Builder for Lab 02 Report
+﻿# PowerShell OpenXML Document Builder for Lab 02 Report (English Figures & Links)
 # Student: Nguyễn Văn Linh (26560037)
 # Output: 26560037_NguyễnVănLinh_Lab02.docx
 
@@ -55,10 +55,10 @@ $coreProps = @"
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dc:title>Lab 2 Report: Figma-to-Code, Layouts &amp; Responsive Design</dc:title>
-  <dc:subject>Web Development Laboratory - Lab 02 Homework</dc:subject>
+  <dc:subject>Lab 02 Screenshot Verification Report</dc:subject>
   <dc:creator>$studentName</dc:creator>
   <cp:lastModifiedBy>$studentName</cp:lastModifiedBy>
-  <cp:revision>2</cp:revision>
+  <cp:revision>4</cp:revision>
 </cp:coreProperties>
 "@
 [System.IO.File]::WriteAllText("$buildDir\docProps\core.xml", $coreProps, [System.Text.Encoding]::UTF8)
@@ -81,7 +81,7 @@ $stylesXml = @'
   <w:docDefaults>
     <w:rPrDefault>
       <w:rPr>
-        <w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:eastAsia="Calibri" w:cs="Calibri"/>
+        <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
         <w:sz w:val="22"/>
         <w:szCs w:val="22"/>
         <w:lang w:val="en-US"/>
@@ -89,7 +89,7 @@ $stylesXml = @'
     </w:rPrDefault>
     <w:pPrDefault>
       <w:pPr>
-        <w:spacing w:after="140" w:line="260" w:lineRule="auto"/>
+        <w:spacing w:after="120" w:line="240" w:lineRule="auto"/>
       </w:pPr>
     </w:pPrDefault>
   </w:docDefaults>
@@ -109,7 +109,7 @@ $sb = New-Object System.Text.StringBuilder
   <w:body>
 '@)
 
-function Emit-Para($text, $size=22, $bold=$false, $color="1E293B", $align="left", $font="Calibri", $spaceBefore=0, $spaceAfter=120, $italic=$false) {
+function Emit-Para($text, $size=22, $bold=$false, $color="0F172A", $align="left", $font="Arial", $spaceBefore=0, $spaceAfter=100, $italic=$false) {
     $b = if ($bold) { "<w:b/>" } else { "" }
     $i = if ($italic) { "<w:i/>" } else { "" }
     $jc = if ($align -ne "left") { "<w:jc w:val=""$align""/>" } else { "" }
@@ -117,21 +117,21 @@ function Emit-Para($text, $size=22, $bold=$false, $color="1E293B", $align="left"
     [void]$sb.Append("<w:p><w:pPr>$jc<w:spacing w:before=""$spaceBefore"" w:after=""$spaceAfter""/></w:pPr><w:r><w:rPr><w:rFonts w:ascii=""$font"" w:hAnsi=""$font""/><w:sz w:val=""$size""/>$b$i<w:color w:val=""$color""/></w:rPr><w:t xml:space=""preserve"">$escaped</w:t></w:r></w:p>")
 }
 
-# Title & Subtitle
-Emit-Para -text "LAB 2: FIGMA-TO-CODE, LAYOUTS & RESPONSIVE DESIGN" -size 36 -bold $true -color "1E1B4B" -align "center" -font "Arial" -spaceBefore 0 -spaceAfter 60
-Emit-Para -text "Homework Assignment: VibeTech Responsive E-Commerce Workspace Gear Landing Page" -size 24 -italic $true -color "4F46E5" -align "center" -font "Calibri" -spaceBefore 0 -spaceAfter 240
+# Tiêu đề báo cáo
+Emit-Para -text "LAB 2 REPORT: FIGMA-TO-CODE & RESPONSIVE DESIGN" -size 32 -bold $true -color "1E1B4B" -align "center" -font "Arial" -spaceBefore 0 -spaceAfter 40
+Emit-Para -text "Homework Assignment: VibeTech Responsive E-Commerce Workspace Gear" -size 22 -bold $true -color "4F46E5" -align "center" -font "Arial" -spaceBefore 0 -spaceAfter 180
 
-# Student Credentials Table
+# Bảng thông tin sinh viên và link GitHub
 [void]$sb.Append(@'
 <w:tbl>
   <w:tblPr>
     <w:tblW w:w="9360" w:type="dxa"/>
     <w:jc w:val="center"/>
     <w:tblBorders>
-      <w:top w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:left w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:bottom w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:right w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
+      <w:top w:val="single" w:sz="8" w:space="0" w:color="4F46E5"/>
+      <w:left w:val="single" w:sz="8" w:space="0" w:color="4F46E5"/>
+      <w:bottom w:val="single" w:sz="8" w:space="0" w:color="4F46E5"/>
+      <w:right w:val="single" w:sz="8" w:space="0" w:color="4F46E5"/>
       <w:insideH w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>
       <w:insideV w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>
     </w:tblBorders>
@@ -141,18 +141,24 @@ Emit-Para -text "Homework Assignment: VibeTech Responsive E-Commerce Workspace G
 $creds = @(
     @("Student Full Name:", $studentName),
     @("Student ID:", "26560037"),
-    @("Academic Course:", "Web Development Laboratory - Lab Session 02"),
-    @("Figma Project File:", "VibeTech E-Commerce Workspace Gear (Unleash the Next Level)"),
+    @("Course:", "Web Development Laboratory - Lab Session 02"),
+    @("Project Name:", "VibeTech E-Commerce Workspace Gear (Unleash the Next Level)"),
     @("Git Commit Message:", "lab02"),
-    @("Target Repository URL:", "https://github.com/linh-nguyen123/Web-development-lab"),
-    @("Live GitHub Pages URL:", "https://linh-nguyen123.github.io/Web-development-lab/")
+    @("GitHub Repository URL:", "https://github.com/linh-nguyen123/Web-development-lab"),
+    @("GitHub Pages Live Demo:", "https://linh-nguyen123.github.io/Web-development-lab/")
 )
 
 foreach ($c in $creds) {
     $k = [System.Security.SecurityElement]::Escape($c[0])
     $v = [System.Security.SecurityElement]::Escape($c[1])
-    $fontVal = if ($k -like "*URL*" -or $k -like "*Commit*") { "Consolas" } else { "Arial" }
-    $colVal = if ($k -like "*URL*") { "0284C7" } elseif ($k -like "*Commit*") { "0F766E" } else { "0F172A" }
+    $isLink = $k -like "*URL*" -or $k -like "*Demo*"
+    $isCommit = $k -like "*Commit*"
+    $fontVal = if ($isLink -or $isCommit) { "Consolas" } else { "Arial" }
+    $colVal = if ($isLink) { "0284C7" } elseif ($isCommit) { "0F766E" } else { "0F172A" }
+    $boldVal = $isCommit -or ($k -like "*Name*") -or ($k -like "*ID*")
+    $bTag = if ($boldVal) { "<w:b/>" } else { "" }
+    $uTag = if ($isLink) { "<w:u w:val=""single""/>" } else { "" }
+
     [void]$sb.Append(@"
   <w:tr>
     <w:tc>
@@ -169,133 +175,21 @@ foreach ($c in $creds) {
         <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
         <w:tcMar><w:top w:w="120" w:type="dxa"/><w:bottom w:w="120" w:type="dxa"/><w:left w:w="160" w:type="dxa"/><w:right w:w="160" w:type="dxa"/></w:tcMar>
       </w:tcPr>
-      <w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="$fontVal" w:hAnsi="$fontVal"/><w:b/><w:sz w:val="20"/><w:color w:val="$colVal"/></w:rPr><w:t>$v</w:t></w:r></w:p>
+      <w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="$fontVal" w:hAnsi="$fontVal"/>$bTag$uTag<w:sz w:val="20"/><w:color w:val="$colVal"/></w:rPr><w:t>$v</w:t></w:r></w:p>
     </w:tc>
   </w:tr>
 "@)
 }
 [void]$sb.Append("</w:tbl>")
-Emit-Para -text "" -size 10 -spaceAfter 160
+Emit-Para -text "" -size 10 -spaceAfter 180
 
-# --- SECTION 1: OVERVIEW & ARCHITECTURE ---
-Emit-Para -text "1. Overview & Architectural Analysis" -size 28 -bold $true -color "1E1B4B" -font "Arial" -spaceBefore 200 -spaceAfter 80
+# Section Header
+Emit-Para -text "LAB EXECUTION & SCREENSHOT EVIDENCE" -size 24 -bold $true -color "1E1B4B" -font "Arial" -spaceBefore 120 -spaceAfter 120
 
-# 1.1 Viewport
-Emit-Para -text "1.1 The Responsive Viewport Meta Tag" -size 24 -bold $true -color "1E293B" -font "Arial" -spaceBefore 120 -spaceAfter 60
-Emit-Para -text "Without configuring the viewport metadata in the HTML <head>, mobile browsers default to rendering pages inside an artificial virtual desktop viewport (typically 980px wide). This causes the UI to zoom out drastically, making fonts illegible and action buttons impossible to tap on smartphones. In this homework assignment, the mandatory viewport meta tag is specified as:" -size 22 -color "334155" -spaceAfter 80
-Emit-Para -text '<meta name="viewport" content="width=device-width, initial-scale=1.0">' -size 22 -bold $true -color "4F46E5" -font "Consolas" -spaceBefore 40 -spaceAfter 80
-Emit-Para -text "• width=device-width: Sets the layout viewport width to match the exact physical device screen width in CSS pixels (e.g. 390px on iPhone 14)." -size 22 -color "334155" -spaceAfter 40
-Emit-Para -text "• initial-scale=1.0: Enforces a 1:1 scale ratio on initial page load, preventing unexpected synthetic browser zooming." -size 22 -color "334155" -spaceAfter 120
-
-# 1.2 Figma Inspection & Design Tokens
-Emit-Para -text "1.2 Figma Dev Mode Inspection and CSS Design Tokens (:root Variables)" -size 24 -bold $true -color "1E293B" -font "Arial" -spaceBefore 160 -spaceAfter 60
-Emit-Para -text "Following standard frontend engineering workflows, exact design tokens were extracted directly from the Figma canvas (e-commerce project) in Dev Mode. Spacings were inspected by holding the Alt key, font-family was set to Inter, and design tokens were encapsulated as CSS variables in :root:" -size 22 -color "334155" -spaceAfter 100
-
-# Tokens Table
-[void]$sb.Append(@'
-<w:tbl>
-  <w:tblPr>
-    <w:tblW w:w="9360" w:type="dxa"/>
-    <w:jc w:val="center"/>
-    <w:tblBorders>
-      <w:top w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:left w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:bottom w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:right w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:insideH w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>
-      <w:insideV w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>
-    </w:tblBorders>
-  </w:tblPr>
-  <w:tr>
-    <w:tc><w:tcPr><w:tcW w:w="2800" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="4F46E5"/><w:tcMar><w:top w:w="120" w:type="dxa"/><w:bottom w:w="120" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>CSS Variable Token</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="4F46E5"/><w:tcMar><w:top w:w="120" w:type="dxa"/><w:bottom w:w="120" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>Value (Figma Spec)</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="4160" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="4F46E5"/><w:tcMar><w:top w:w="120" w:type="dxa"/><w:bottom w:w="120" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>Functional UI Purpose</w:t></w:r></w:p></w:tc>
-  </w:tr>
-'@)
-
-$vars = @(
-    @("--bg-page", "#f8fafc", "Clean neutral light page background from Figma frame"),
-    @("--brand-primary", "#4f46e5", "VibeTech brand indigo color for logo, cart badge, active links"),
-    @("--brand-dark", "#0f172a", "Primary button background and Hot/Sale card badge background"),
-    @("--bg-glass", "rgba(255, 255, 255, 0.88)", "Sticky navbar glassmorphism background with 12px blur"),
-    @("--shadow-card-hover", "0 16px 28px -6px ...", "Smooth elevation box shadow on card hover")
-)
-foreach ($v in $vars) {
-    $t = [System.Security.SecurityElement]::Escape($v[0])
-    $val = [System.Security.SecurityElement]::Escape($v[1])
-    $role = [System.Security.SecurityElement]::Escape($v[2])
-    [void]$sb.Append(@"
-  <w:tr>
-    <w:tc><w:tcPr><w:tcW w:w="2800" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F8FAFC"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:b/><w:sz w:val="19"/><w:color w:val="4F46E5"/></w:rPr><w:t>$t</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:sz w:val="19"/><w:color w:val="1E293B"/></w:rPr><w:t>$val</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="4160" w:type="dxa"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="19"/><w:color w:val="475569"/></w:rPr><w:t>$role</w:t></w:r></w:p></w:tc>
-  </w:tr>
-"@)
-}
-[void]$sb.Append("</w:tbl>")
-Emit-Para -text "" -size 10 -spaceAfter 140
-
-# 1.3 CSS Flexbox vs. CSS Grid Analysis
-Emit-Para -text "1.3 Architectural Comparison: CSS Flexbox vs. CSS Grid" -size 24 -bold $true -color "1E293B" -font "Arial" -spaceBefore 160 -spaceAfter 60
-Emit-Para -text "Choosing between Flexbox and Grid represents the core architectural layout decision in modern frontend design:" -size 22 -color "334155" -spaceAfter 100
-
-[void]$sb.Append(@'
-<w:tbl>
-  <w:tblPr>
-    <w:tblW w:w="9360" w:type="dxa"/>
-    <w:jc w:val="center"/>
-    <w:tblBorders>
-      <w:top w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:left w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:bottom w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:right w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:insideH w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>
-      <w:insideV w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>
-    </w:tblBorders>
-  </w:tblPr>
-  <w:tr>
-    <w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="4F46E5"/><w:tcMar><w:top w:w="120" w:type="dxa"/><w:bottom w:w="120" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>Dimension / Property</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="3480" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="4F46E5"/><w:tcMar><w:top w:w="120" w:type="dxa"/><w:bottom w:w="120" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>CSS Flexbox (1-Dimensional)</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="3480" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="4F46E5"/><w:tcMar><w:top w:w="120" w:type="dxa"/><w:bottom w:w="120" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>CSS Grid (2-Dimensional)</w:t></w:r></w:p></w:tc>
-  </w:tr>
-'@)
-
-$comp = @(
-    @("Dimensions", "1-Dimensional: Aligns items along one axis at a time (row OR column).", "2-Dimensional: Simultaneously coordinates items across rows AND columns in a unified layout plane."),
-    @("Design Approach", "Content-First: Items determine their own dimensions based on internal content; container aligns them.", "Layout-First: Container defines explicit grid track structures; items snap within assigned slots."),
-    @("Ideal UI Targets", "Sticky navigation bars, toolbar actions, search/cart buttons, mobile drawer menus.", "Product catalogs, multi-column portfolio grids, image galleries, complex web apps."),
-    @("Homework Implementation", "Navbar: display: flex; justify-content: space-between; align-items: center; with glassmorphism.", "Product Grid: grid-template-columns across 4 columns (desktop), 2 columns (tablet), 1 column (mobile).")
-)
-
-foreach ($c in $comp) {
-    $dim = [System.Security.SecurityElement]::Escape($c[0])
-    $fb = [System.Security.SecurityElement]::Escape($c[1])
-    $gd = [System.Security.SecurityElement]::Escape($c[2])
-    [void]$sb.Append(@"
-  <w:tr>
-    <w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F8FAFC"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="19"/><w:color w:val="1E293B"/></w:rPr><w:t>$dim</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="3480" w:type="dxa"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="19"/><w:color w:val="334155"/></w:rPr><w:t>$fb</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="3480" w:type="dxa"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="19"/><w:color w:val="334155"/></w:rPr><w:t>$gd</w:t></w:r></w:p></w:tc>
-  </w:tr>
-"@)
-}
-[void]$sb.Append("</w:tbl>")
-Emit-Para -text "" -size 10 -spaceAfter 140
-
-# 1.4 Responsive Breakpoints
-Emit-Para -text "1.4 Mobile-First Responsive Breakpoint Architecture" -size 24 -bold $true -color "1E293B" -font "Arial" -spaceBefore 160 -spaceAfter 60
-Emit-Para -text "Styles are authored with a Mobile-First architecture using progressive enhancement matching the Figma design frames:" -size 22 -color "334155" -spaceAfter 60
-Emit-Para -text "• Mobile Viewport (< 768px): Base styles provide a 1-column product stack (.portfolio-grid { grid-template-columns: 1fr; }). Desktop links collapse into an interactive mobile drawer toggled by the hamburger button." -size 22 -color "334155" -spaceAfter 40
-Emit-Para -text "• Tablet Viewport (768px - 1023px, Figma 768w light): @media (min-width: 768px) expands the product grid to 2 columns (repeat(2, 1fr)), reveals centered horizontal navigation links, and hides the hamburger button." -size 22 -color "334155" -spaceAfter 40
-Emit-Para -text "• Desktop Viewport (>= 1024px, Figma 1024w & 1920w light): @media (min-width: 1024px) establishes a 4-column product grid (repeat(4, 1fr)), centers container at 1280px, and enables smooth card hover elevation." -size 22 -color "334155" -spaceAfter 180
-
-# --- SECTION 2: UI & FEATURE SCREENSHOT CHECKLIST ---
-Emit-Para -text "2. UI & Feature Implementation Screenshot Checklist" -size 28 -bold $true -color "1E1B4B" -font "Arial" -spaceBefore 240 -spaceAfter 80
-Emit-Para -text "This section provides pre-formatted screenshot placeholders for grading evaluation. Paste captured browser screenshots directly into each placeholder frame below:" -size 22 -color "334155" -spaceAfter 140
-
-function Emit-Placeholder($title, $spec) {
-    $tEsc = [System.Security.SecurityElement]::Escape($title)
-    $sEsc = [System.Security.SecurityElement]::Escape($spec)
+# Hàm sinh khung dán ảnh tiện lợi bằng tiếng Anh
+function Emit-ImagePlaceholder($figureNum, $title, $description) {
+    $tEsc = [System.Security.SecurityElement]::Escape("$figureNum: $title")
+    $dEsc = [System.Security.SecurityElement]::Escape($description)
     [void]$sb.Append(@"
 <w:tbl>
   <w:tblPr>
@@ -318,7 +212,7 @@ function Emit-Placeholder($title, $spec) {
         <w:tcMar><w:top w:w="120" w:type="dxa"/><w:bottom w:w="120" w:type="dxa"/><w:left w:w="160" w:type="dxa"/><w:right w:w="160" w:type="dxa"/></w:tcMar>
       </w:tcPr>
       <w:p><w:pPr><w:spacing w:before="0" w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="21"/><w:color w:val="312E81"/></w:rPr><w:t>$tEsc</w:t></w:r></w:p>
-      <w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/><w:color w:val="475569"/></w:rPr><w:t>$sEsc</w:t></w:r></w:p>
+      <w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:rPr><w:sz w:val="18"/><w:color w:val="475569"/></w:rPr><w:t>$dEsc</w:t></w:r></w:p>
     </w:tc>
   </w:tr>
   <w:tr>
@@ -326,9 +220,9 @@ function Emit-Placeholder($title, $spec) {
       <w:tcPr>
         <w:tcW w:w="9360" w:type="dxa"/>
         <w:shd w:val="clear" w:color="auto" w:fill="F8FAFC"/>
-        <w:tcMar><w:top w:w="800" w:type="dxa"/><w:bottom w:w="800" w:type="dxa"/><w:left w:w="160" w:type="dxa"/><w:right w:w="160" w:type="dxa"/></w:tcMar>
+        <w:tcMar><w:top w:w="900" w:type="dxa"/><w:bottom w:w="900" w:type="dxa"/><w:left w:w="160" w:type="dxa"/><w:right w:w="160" w:type="dxa"/></w:tcMar>
       </w:tcPr>
-      <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:b/><w:sz w:val="20"/><w:color w:val="94A3B8"/></w:rPr><w:t>--- [PASTE SCREENSHOT HERE] ---</w:t></w:r></w:p>
+      <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:b/><w:sz w:val="20"/><w:color w:val="94A3B8"/></w:rPr><w:t>[ PASTE SCREENSHOT HERE ]</w:t></w:r></w:p>
     </w:tc>
   </w:tr>
 </w:tbl>
@@ -336,57 +230,20 @@ function Emit-Placeholder($title, $spec) {
     Emit-Para -text "" -size 10 -spaceAfter 140
 }
 
-Emit-Placeholder -title "[Placeholder 1] Sticky Navbar & Hover Effects (Flexbox)" -spec "Sticky header with VibeTech logo, centered navigation links (Home, Products, Deals, About), search & cart icons, and glassmorphism (backdrop-filter: blur(12px))."
-Emit-Placeholder -title "[Placeholder 2] Product/Portfolio Grid Layout (CSS Grid 8 items)" -spec "Full product grid showing 8 items: Wireless Mouse, Tactix K85 Mechanical, ZenSound ANC Headset, NovaFit Smart Watch, Horizon 27 IPS Display, StreamMic Pro, Lumos Desk Lamp, and ErgoStand Riser."
-Emit-Placeholder -title "[Placeholder 3] Responsive Mobile Layout (< 768px - 1 column)" -spec "Mobile simulation (< 768px): 1-column card stack, visible hamburger button, and active mobile navigation drawer."
-Emit-Placeholder -title "[Placeholder 4] Responsive Tablet Layout (768px - 1023px - 2 columns, Figma 768w light)" -spec "Tablet simulation (768px - 1023px): 2-column product grid, hidden hamburger button, and horizontal desktop navbar links active."
-Emit-Placeholder -title "[Placeholder 5] Responsive Desktop Layout (>= 1024px - 4 columns, Figma 1024w & 1920w light)" -spec "Desktop viewport (>= 1024px): 4-column product grid layout, centered 1280px container, and full desktop navbar."
-Emit-Placeholder -title "[Placeholder 6] Interactive Hover States (Image Zoom & Elevation)" -spec "Active cursor hover showing card image scale (transform: scale(1.08)), card elevation (translateY(-6px)), and glowing box-shadow."
+# 6 Figures in English
+Emit-ImagePlaceholder -figureNum "Figure 1" -title "Sticky Navigation Bar with CSS Flexbox & Glassmorphism Effect" -description "Capture of the sticky header featuring VibeTech brand identity, centered navigation links (Home, Products, Deals, About), search icon, shopping cart badge, and frosted glass background blur."
 
-# --- SECTION 3: GIT & GITHUB PAGES ---
-Emit-Para -text "3. Git Deployment & GitHub Pages Verification" -size 28 -bold $true -color "1E1B4B" -font "Arial" -spaceBefore 240 -spaceAfter 80
-Emit-Para -text "The source code has been structured, committed with message 'lab02', pushed to GitHub, and hosted on GitHub Pages:" -size 22 -color "334155" -spaceAfter 100
+Emit-ImagePlaceholder -figureNum "Figure 2" -title "Responsive Desktop Product Grid Layout (CSS Grid - 4 Columns, 8 Items)" -description "Full desktop browser view (>= 1024px) showcasing the complete 4-column product grid with 8 curated workspace gear cards, matching Figma 1920w and 1024w frames."
 
-[void]$sb.Append(@'
-<w:tbl>
-  <w:tblPr>
-    <w:tblW w:w="9360" w:type="dxa"/>
-    <w:jc w:val="center"/>
-    <w:tblBorders>
-      <w:top w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:left w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:bottom w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:right w:val="single" w:sz="6" w:space="0" w:color="4F46E5"/>
-      <w:insideH w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>
-      <w:insideV w:val="single" w:sz="4" w:space="0" w:color="CBD5E1"/>
-    </w:tblBorders>
-  </w:tblPr>
-  <w:tr>
-    <w:tc><w:tcPr><w:tcW w:w="3000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F1F5F9"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="1E293B"/></w:rPr><w:t>Target Git Repository:</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="6360" w:type="dxa"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:sz w:val="19"/><w:color w:val="0284C7"/></w:rPr><w:t>https://github.com/linh-nguyen123/Web-development-lab</w:t></w:r></w:p></w:tc>
-  </w:tr>
-  <w:tr>
-    <w:tc><w:tcPr><w:tcW w:w="3000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F1F5F9"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="1E293B"/></w:rPr><w:t>Git Commit Message:</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="6360" w:type="dxa"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:b/><w:sz w:val="19"/><w:color w:val="0F766E"/></w:rPr><w:t>lab02</w:t></w:r></w:p></w:tc>
-  </w:tr>
-  <w:tr>
-    <w:tc><w:tcPr><w:tcW w:w="3000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="F1F5F9"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="20"/><w:color w:val="1E293B"/></w:rPr><w:t>GitHub Pages Live URL:</w:t></w:r></w:p></w:tc>
-    <w:tc><w:tcPr><w:tcW w:w="6360" w:type="dxa"/><w:tcMar><w:top w:w="100" w:type="dxa"/><w:bottom w:w="100" w:type="dxa"/><w:left w:w="140" w:type="dxa"/><w:right w:w="140" w:type="dxa"/></w:tcMar></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas"/><w:sz w:val="19"/><w:color w:val="0284C7"/></w:rPr><w:t>https://linh-nguyen123.github.io/Web-development-lab/</w:t></w:r></w:p></w:tc>
-  </w:tr>
-</w:tbl>
-'@)
-Emit-Para -text "" -size 10 -spaceAfter 120
+Emit-ImagePlaceholder -figureNum "Figure 3" -title "Responsive Mobile Viewport & Hamburger Menu Drawer (< 768px - 1 Column)" -description "Browser DevTools mobile device emulation (< 768px, ~390px width) showing single-column product stacking and the interactive mobile navigation drawer toggled open."
 
-Emit-Para -text "Exact Terminal Commands for Git Execution:" -size 22 -bold $true -color "1E1B4B" -font "Arial" -spaceBefore 80 -spaceAfter 40
-Emit-Para -text "git add index.html styles.css assets/ 26560037_NguyễnVănLinh_Lab02.docx generate_report.py README.md" -size 20 -bold $true -color "0F172A" -font "Consolas" -spaceAfter 20
-Emit-Para -text 'git commit -m "lab02"' -size 20 -bold $true -color "0F766E" -font "Consolas" -spaceAfter 20
-Emit-Para -text "git branch -M main" -size 20 -bold $true -color "0F172A" -font "Consolas" -spaceAfter 20
-Emit-Para -text "git remote add origin https://github.com/linh-nguyen123/Web-development-lab.git" -size 20 -bold $true -color "0F172A" -font "Consolas" -spaceAfter 20
-Emit-Para -text "git push -u origin main" -size 20 -bold $true -color "4F46E5" -font "Consolas" -spaceAfter 140
+Emit-ImagePlaceholder -figureNum "Figure 4" -title "Responsive Tablet Viewport Layout (768px - 1023px - 2 Columns)" -description "Browser DevTools tablet emulation (e.g. iPad, ~820px width) illustrating the 2-column product grid transition with desktop horizontal navigation links visible, matching Figma 768w light frame."
 
-Emit-Placeholder -title "[Placeholder 7] Live GitHub Pages Deployment Proof & Repository Link" -spec "Screenshot from GitHub repository Settings -> Pages displaying the active GitHub Pages green checkmark and public live URL."
+Emit-ImagePlaceholder -figureNum "Figure 5" -title "Interactive Card Hover States (Smooth Image Zoom & Elevation)" -description "Active cursor hover interaction on a product card, demonstrating smooth image scaling (scale(1.08)), card elevation (translateY(-6px)), and glowing box-shadow elevation."
 
-# Close document
+Emit-ImagePlaceholder -figureNum "Figure 6" -title "Git Commit Verification (lab02) & Live GitHub Pages Deployment Proof" -description "Terminal execution proof showing git commit message 'lab02' alongside the live website URL hosted and functioning on GitHub Pages."
+
+# Kết thúc document
 [void]$sb.Append(@'
     <w:sectPr>
       <w:pgSz w:w="12240" w:h="15840"/>
@@ -398,10 +255,10 @@ Emit-Placeholder -title "[Placeholder 7] Live GitHub Pages Deployment Proof & Re
 
 [System.IO.File]::WriteAllText("$buildDir\word\document.xml", $sb.ToString(), [System.Text.Encoding]::UTF8)
 
-# Compress to .docx
+# Nén thành file docx
 Add-Type -AssemblyName "System.IO.Compression.FileSystem"
 $targetZip = Join-Path (Get-Location).Path $outDocx
 [System.IO.Compression.ZipFile]::CreateFromDirectory((Resolve-Path $buildDir).Path, $targetZip)
 
 Remove-Item -Path $buildDir -Recurse -Force
-Write-Host "SUCCESS: Generated $outDocx successfully!"
+Write-Host "SUCCESS: Generated $outDocx successfully"
